@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: team-carmen
+  name: team-burnham
   namespace: argocd
   labels:
     {{- toYaml .Values.labels | nindent 4 }}
@@ -10,14 +10,19 @@ metadata:
 spec:
   project: default
   destination:
-    namespace: team-carmen
+    namespace: team-burnham
     server: {{ .Values.spec.destination.server }}
   source:
-    repoURL: https://github.com/CarmenAPuccio/GeoLocationAPI
-    path: templates
-    targetRevision: HEAD
+    repoURL: {{ .Values.spec.source.repoURL }}
+    targetRevision: {{ .Values.spec.source.targetRevision }}
+    path: teams/team-burnham/dev
+    helm:
+      values: |
+        {{- toYaml .Values | nindent 8 }}
   syncPolicy:
     automated:
       prune: true
+      allowEmpty: true
+      selfHeal: false      
     syncOptions:
     - CreateNamespace=true
