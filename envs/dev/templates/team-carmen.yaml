@@ -14,10 +14,4 @@ spec:
     repoURL: https://github.com/CarmenAPuccio/GeoLocationAPI
     path: templates
     targetRevision: HEAD
-  syncPolicy:
-    automated:
-      prune: true
-      allowEmpty: true
-      selfHeal: false      
-    syncOptions:
-    - CreateNamespace=true
+  syncPolicy: {}
